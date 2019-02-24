@@ -1,5 +1,6 @@
 package com.example.kevinbui.meterstoinches;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,12 +32,25 @@ public class MainActivity extends AppCompatActivity {
                 double multiplier = 39.37;
                 double result = 0.0;
 
-                // Sets the meterValue to what the users enters and converts to Double
-                double meterValue = Double.parseDouble(enterMeters.getText().toString());
-                result = meterValue * multiplier;
+                // If nothing is entered
+                if (enterMeters.getText().toString().equals("")) {
 
-                // Set the result to resultTextView
-                resultTextView.setText(Double.toString(result) + " inches");
+                    // Error Message will appear in red
+                    resultTextView.setText(R.string.error_message);
+                    resultTextView.setTextColor(Color.RED);
+
+                } else {
+
+                    // Sets the meterValue to what the users enters and converts to Double
+                    double meterValue = Double.parseDouble(enterMeters.getText().toString());
+                    result = meterValue * multiplier;
+
+                    resultTextView.setTextColor(Color.DKGRAY);
+                    // Set the result to resultTextView and convert to 2 decimal points
+                    resultTextView.setText(String.format("%.2f", result) + " inches");
+                }
+
+
             }
         });
 
